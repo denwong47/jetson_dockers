@@ -93,3 +93,7 @@ target/
 
 # wheels
 *.whl
+
+# commercial
+# Do not include anything that is commercial in nature
+/commercial
