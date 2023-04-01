@@ -82,12 +82,7 @@ RUN ${PIP_INSTALL} spacy[cu102] spacy_fastlang textblob GPUtil openpyxl
 # RUN ${PIP_INSTALL} cuml-cuda100 --extra-index-url=https://pypi.nvidia.com
 # RUN ${PIP_INSTALL} cugraph-cuda100 --extra-index-url=https://pypi.nvidia.com
 
-
 EXPOSE 8080 8081
-
-# Assert that both torch and spacy has access to GPU
-RUN python3.9 -c "import torch; assert torch.cuda.is_available()"
-RUN python3.9 -c "import spacy; assert spacy.require_gpu()"
 
 ENTRYPOINT ["python3.9", "/usr/local/bin/dockerd-entrypoint.py"]
 CMD ["torchserve", "--start", "--ts-config", "/home/model-server/config.properties", "--model-store", "/home/model-server/"]

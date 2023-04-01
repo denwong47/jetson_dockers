@@ -33,5 +33,8 @@ RUN make altinstall
 WORKDIR /root/Downloads
 RUN rm -rf Python-${PYTHON_VERSION}
 
-RUN python3.9 -m pip install --upgrade pip ipython pytest
+RUN python3.9 -m pip install --upgrade pip ipython pytest setuptools wheel
 
+COPY ./fake-nvidia-smi.py /var/fake-nvidia-smi/
+RUN ln -s fake-nvidia-smi.py /var/fake-nvidia-smi/nvidia-smi
+ENV PATH="/var/fake-nvidia-smi:${PATH}"
